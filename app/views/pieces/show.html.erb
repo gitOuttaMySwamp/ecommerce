@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @piece.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @piece.price %>
+</p>
+
+<p>
+  <strong>Sizeid:</strong>
+  <%= @piece.sizeId %>
+</p>
+
+<p>
+  <strong>Detailid:</strong>
+  <%= @piece.detailId %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @piece.image %>
+</p>
+
+<p>
+  <strong>Dimensions:</strong>
+  <%= @piece.dimensions %>
+</p>
+
+<%= link_to 'Edit', edit_piece_path(@piece) %> |
+<%= link_to 'Back', pieces_path %>
