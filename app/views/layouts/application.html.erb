@@ -38,30 +38,13 @@
                 </div>
                 <%= submit_tag ('Search'), class: 'button is-link is-rounded' %>
               </div>
-              <div class="field">
-                <p class="control">
-                    <div class="b-checkbox is-info">
-                        <input id="checkbox" class="styled" checked type="checkbox">
-                        <label for="checkbox">
-                            Simple
-                        </label>
-                        <input id="checkbox" class="styled" checked type="checkbox">
-                        <label for="checkbox">
-                            Intricate
-                        </label>
-                        <input id="checkbox" class="styled" checked type="checkbox">
-                        <label for="checkbox">
-                            Elaborate
-                        </label>
-                    </div>
-                </p>
-              </div>
               <% end %>
             </div>
           </div>
         </nav>
         <br>
       </header>
+      <p>You have visited this site <%= pluralize @visit_count, 'time' %>.</p>
       <%= yield %>
       </div>
     </section>
