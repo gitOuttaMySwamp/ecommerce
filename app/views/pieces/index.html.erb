@@ -1,4 +1,12 @@
-<%=  debug session[:cart] %>
+<details>
+  <summary>Shopping Cart</summary>
+  <ul>
+    <% @cart.each do |item| %>
+      <li><%= item.name %></li>
+    <% end %>
+  </ul>
+</details>
+
 <div class="columns is-multiline">
   <% @pieces.each do |piece| %>
     <div class="column is-half">
