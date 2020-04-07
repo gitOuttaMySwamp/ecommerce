@@ -3,8 +3,8 @@
 class PiecesController < ApplicationController
   before_action :set_piece, only: [:show]
   before_action :setup_session
-  before_action :increment_visit_count
-  before_action :load_cart
+  before_action :increment_visit_count, only: %i[index]
+  before_Action :load_cart
 
   # GET /pieces
   # GET /pieces.json
