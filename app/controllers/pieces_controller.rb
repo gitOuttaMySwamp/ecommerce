@@ -2,16 +2,21 @@
 
 class PiecesController < ApplicationController
   before_action :set_piece, only: [:show]
+  before_action :initialize_session
+  before_action :increment_visit_count, only: %i[index]
+  before_Action :load_cart
 
-  # GET /pieces
-  # GET /pieces.json
   def index
     @pieces = Piece.search(params[:search], params[:size], params[:page])
   end
 
-  # GET /pieces/1
-  # GET /pieces/1.json
   def show; end
+
+  def add_to_cart
+    id = params[:id].to_i
+    session[:cart] << id unless session[:cart].include?(id)
+    redirect_to root_path
+  end
 
   # # GET /pieces/new
   # def new
@@ -63,6 +68,20 @@ class PiecesController < ApplicationController
   # end
 
   private
+
+  def initialize_session
+    session[:visit_count] ||= 0
+    session[:cart] ||= []
+  end
+
+  def load_cart
+    @cart = Piece.find(session[:cart])
+  end
+
+  def increment_visit_count
+    session[:visit_count] += 1
+    @visit_count = session[:visit_count]
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_piece

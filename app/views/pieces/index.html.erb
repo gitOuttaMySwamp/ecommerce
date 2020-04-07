@@ -1,6 +1,6 @@
 <div class="columns is-multiline">
   <% @pieces.each do |piece| %>
-    <div class="column is-half">
+  <div class="column is-half">
     <div class="card">
       <div class="card-content">
         <p class="title"><%=  link_to piece.name, piece %></p>
@@ -19,6 +19,11 @@
       </p>
       </footer>
     </div>
+    <% if @cart.include?(piece) %>
+      <p>Product is in your cart.</p>
+    <% else %>
+      <p><%= link_to 'add to cart', add_to_cart_path(piece.id), method: :post %></p>
+    <% end %>
   </div>
   <% end %>
 </div>
