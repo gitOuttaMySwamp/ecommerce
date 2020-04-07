@@ -4,7 +4,6 @@ class PiecesController < ApplicationController
   before_action :set_piece, only: [:show]
   before_action :setup_session
   before_action :increment_visit_count, only: %i[index]
-  before_Action :load_cart
 
   # GET /pieces
   # GET /pieces.json
@@ -19,6 +18,13 @@ class PiecesController < ApplicationController
   def add_to_cart
     id = params[:id].to_i
     session[:cart] << id unless session[:cart].include?(id)
+    @cart = Piece.find(session[:cart])
+    redirect_to root_path
+  end
+
+  def remove_from_cart
+    id = params[:id].to_i
+    session[:cart].delete(id)
     redirect_to root_path
   end
 
@@ -76,9 +82,6 @@ class PiecesController < ApplicationController
   def setup_session
     session[:visit_count] ||= 0
     session[:cart] ||= []
-  end
-
-  def load_cart
     @cart = Piece.find(session[:cart])
   end
 

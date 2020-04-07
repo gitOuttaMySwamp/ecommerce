@@ -1,10 +1,14 @@
 <details>
   <summary>Shopping Cart</summary>
-  <ul>
-    <% @cart.each do |item| %>
-      <li><%= item.name %></li>
-    <% end %>
-  </ul>
+  <% if @cart.empty? %>
+    <p>Cart is empty.</p>
+  <% else %>
+    <ul>
+      <% @cart.each do |piece| %>
+        <li><%= piece.name %> <%= link_to 'remove', remove_from_cart_path(piece), method: :delete %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </details>
 
 <div class="columns is-multiline">
@@ -29,7 +33,7 @@
       </footer>
     </div>
     <% if @cart.include?(piece) %>
-      <p>Product is in your cart.</p>
+      <p><%= button_to 'remove from cart', remove_from_cart_path(piece), method: :delete %></p>
     <% else %>
       <p><%= link_to 'add to cart', add_to_cart_path(piece.id), method: :post %></p>
     <% end %>
