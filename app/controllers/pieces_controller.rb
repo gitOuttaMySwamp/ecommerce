@@ -2,8 +2,8 @@
 
 class PiecesController < ApplicationController
   before_action :set_piece, only: [:show]
-  before_action :initialize_session
-  before_action :increment_visit_count, only: %i[index]
+  # before_action :setup_session
+  # before_action :increment_visit_count, only: %i[index]
   before_Action :load_cart
 
   def index
@@ -69,7 +69,7 @@ class PiecesController < ApplicationController
 
   private
 
-  def initialize_session
+  def setup_session
     session[:visit_count] ||= 0
     session[:cart] ||= []
   end
