@@ -7,28 +7,28 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @piece.price %>
+  $<%= @piece.size.price + @piece.detail.price %>
 </p>
 
 <p>
   <strong>Sizeid:</strong>
-  <%= @piece.sizeId %>
+  <%= @piece.size.description %>
 </p>
 
 <p>
   <strong>Detailid:</strong>
-  <%= @piece.detailId %>
+  <%= @piece.detail.description %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Image:</strong>
   <%= @piece.image %>
-</p>
+</p> -->
 
 <p>
   <strong>Dimensions:</strong>
   <%= @piece.dimensions %>
 </p>
 
-<%= link_to 'Edit', edit_piece_path(@piece) %> |
-<%= link_to 'Back', pieces_path %>
+<br>
+<%= link_to 'Back', root_path %>

@@ -11,14 +11,24 @@ class Piece < ApplicationRecord
   max_paginates_per 100
 
   def self.search(search, size, page)
-    where_clause = ''
-    if !search.to_s.empty?
-      where('name LIKE "%' + search + '%"')
-        .where('sizeId = ' + size)
-        .page(page)
+    search_clause = search_clause search
+    size_clause = size_clause size
+    where(search_clause).where(size_clause).page(page)
+  end
+
+  def self.search_clause(search)
+    if !search.to_s.strip.empty?
+      'name LIKE "%' + search.strip + '%"'
     else
-      all.where('sizeId = ' + size)
-         .page(page)
+      '1 = 1'
+    end
+  end
+
+  def self.size_clause(size)
+    if size.to_i.positive?
+      "sizeId = #{size}"
+    else
+      '1 = 1'
     end
   end
 end

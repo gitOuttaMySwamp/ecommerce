@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'bulma-radio-checkbox' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
   </head>
@@ -32,8 +33,28 @@
               <%= form_tag('/', method: :get) do %>
               <div class='navbar-item'>
                 <%= text_field_tag :search, params[:search], class: 'input is-rounded' %>
-                <%= select_tag :search, ['Hot', 'Cold'], params[:size], class: 'select is-rounded' %>
+                <div class='select is-rounded'>
+                  <%= select_tag :size, options_from_collection_for_select(Size.all, 'id', 'description'), include_blank: true, class: 'select' %>
+                </div>
                 <%= submit_tag ('Search'), class: 'button is-link is-rounded' %>
+              </div>
+              <div class="field">
+                <p class="control">
+                    <div class="b-checkbox is-info">
+                        <input id="checkbox" class="styled" checked type="checkbox">
+                        <label for="checkbox">
+                            Simple
+                        </label>
+                        <input id="checkbox" class="styled" checked type="checkbox">
+                        <label for="checkbox">
+                            Intricate
+                        </label>
+                        <input id="checkbox" class="styled" checked type="checkbox">
+                        <label for="checkbox">
+                            Elaborate
+                        </label>
+                    </div>
+                </p>
               </div>
               <% end %>
             </div>
@@ -42,7 +63,6 @@
         <br>
       </header>
       <%= yield %>
-      <%= paginate @pieces %>
       </div>
     </section>
   </div>
