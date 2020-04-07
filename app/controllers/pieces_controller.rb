@@ -2,14 +2,18 @@
 
 class PiecesController < ApplicationController
   before_action :set_piece, only: [:show]
-  # before_action :setup_session
-  # before_action :increment_visit_count, only: %i[index]
+  before_action :setup_session
+  before_action :increment_visit_count, only: %i[index]
   before_Action :load_cart
 
+  # GET /pieces
+  # GET /pieces.json
   def index
     @pieces = Piece.search(params[:search], params[:size], params[:page])
   end
 
+  # GET /pieces/1
+  # GET /pieces/1.json
   def show; end
 
   def add_to_cart
