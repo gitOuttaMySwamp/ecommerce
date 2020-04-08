@@ -62,12 +62,6 @@ i {
   font-size: 2em;
 }
 
-.tables_container {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-around; */
-}
-
 .item_table {
   margin-bottom: 50px;
 }
