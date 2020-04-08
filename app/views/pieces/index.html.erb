@@ -1,16 +1,3 @@
-<details>
-  <summary>Shopping Cart</summary>
-  <% if @cart.empty? %>
-    <p>Cart is empty.</p>
-  <% else %>
-    <ul>
-      <% @cart.each do |piece| %>
-        <li><%= piece.name %> <%= link_to 'remove', remove_from_cart_path(piece), method: :delete %></li>
-      <% end %>
-    </ul>
-  <% end %>
-</details>
-
 <div class="columns is-multiline">
   <% @pieces.each do |piece| %>
   <div class="column is-half">
