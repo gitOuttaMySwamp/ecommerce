@@ -6,9 +6,9 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'bulma-radio-checkbox' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/e226f91dd6.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -26,7 +26,7 @@
               <strong>About</strong>
             </a>
           </div>
-          <div class='navbar-end'>
+          <div class='navbar-start'>
             <div class='navbar-item'>
               <%= form_tag('/', method: :get) do %>
               <div class='navbar-item'>
@@ -38,6 +38,26 @@
               </div>
               <% end %>
             </div>
+          </div>
+          <div class='navbar-end'>
+            <details>
+              <summary>
+                <li>
+                  <a  id="cart">
+                    <i class="fa fa-shopping-cart"></i>
+                  </a>
+                </li>
+              </summary>
+              <% if @cart.empty? %>
+                <p>Cart is empty.</p>
+              <% else %>
+                <ul>
+                  <% @cart.each do |piece| %>
+                    <li><%= piece.name %> <%= link_to 'remove', remove_from_cart_path(piece), method: :delete %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </details>
           </div>
         </nav>
         <br>
