@@ -1,0 +1,54 @@
+<h1 class='title'><strong>Order Review</strong></h1>
+<br>
+<div class='tables_container'>
+  <div class='item_table'>
+    <table class='table is-striped is-hoverable'>
+      <thead>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Detail</th>
+        <th>Dimensions</th>
+        <th>Price</th>
+      </thead>
+      <tfoot>
+      <tr>
+        <td>Total</td>
+        <td></td><td></td><td></td>
+        <td>$<%= @total %></td>
+      </tr>
+      </tfoot>
+      <tbody>
+        <% @cart.each do |piece| %>
+          <tr>
+            <td><%= piece.name %></td>
+            <td><%= piece.size.description %></td>
+            <td><%= piece.detail.description %></td>
+            <td><%= piece.dimensions %></td>
+            <td>$<%= piece.size.price + piece.detail.price %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td class='subtotal'>Subtotal</td>
+          <td></td><td></td><td></td>
+          <td class='subtotal'>$<%= @subtotal %></td>
+        </tr>
+        <tr>
+          <td>GST</td>
+          <td></td><td></td><td></td>
+          <td>$5</td>
+        </tr>
+        <tr>
+          <td>PST</td>
+          <td></td><td></td><td></td>
+          <td>$2</td>
+        </tr>
+        <tr>
+          <td>HST</td>
+          <td></td><td></td><td></td>
+          <td>$1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%= link_to 'Continue Shopping', root_path %>

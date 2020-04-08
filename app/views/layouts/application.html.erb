@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://kit.fontawesome.com/e226f91dd6.js" crossorigin="anonymous"></script>
   </head>
 
@@ -25,14 +26,15 @@
             <a class="navbar-item" href='/home/about'>
               <strong>About</strong>
             </a>
-          </div>
-          <div class='navbar-start'>
             <div class='navbar-item'>
               <%= form_tag('/', method: :get) do %>
               <div class='navbar-item'>
-                <%= text_field_tag :search, params[:search], class: 'input is-rounded' %>
+                <%= text_field_tag :search, params[:search], class: 'input is-rounded', placeholder: 'search' %>
                 <div class='select is-rounded'>
-                  <%= select_tag :size, options_from_collection_for_select(Size.all, 'id', 'description'), include_blank: true, class: 'select' %>
+                  <%= select_tag :size,
+                    options_from_collection_for_select(Size.all, 'id', 'description'),
+                    include_blank: true,
+                    class: 'select' %>
                 </div>
                 <%= submit_tag ('Search'), class: 'button is-link is-rounded' %>
               </div>
@@ -48,10 +50,11 @@
                   </a>
                 </li>
               </summary>
-              <% if @cart.empty? %>
+              <% if !@cart || @cart.empty? %>
                 <p>Cart is empty.</p>
               <% else %>
                 <ul>
+                <li><%= link_to 'Checkout', checkout_invoice_path, method: :get %></li>
                   <% @cart.each do |piece| %>
                     <li><%= piece.name %> <%= link_to 'remove', remove_from_cart_path(piece), method: :delete %></li>
                   <% end %>
@@ -62,7 +65,6 @@
         </nav>
         <br>
       </header>
-      <p>You have visited this site <%= pluralize @visit_count, 'time' %>.</p>
       <%= yield %>
       </div>
     </section>
