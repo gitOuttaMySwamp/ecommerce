@@ -88,6 +88,9 @@
 #              dimensions: '25cm x 35cm').save
 
 # # ------------------------------------------------------
+
+Province.destroy_all
+
 Province.create(
   name: 'Alberta',
   code: 'AB'
