@@ -29,6 +29,9 @@ class CheckoutController < ApplicationController
   end
 
   def invoice
+
+    base_uri 'http://api.salestaxapi.ca/v2/'
+
     @cart = Piece.find(session[:cart])
 
     @subtotal = 0
