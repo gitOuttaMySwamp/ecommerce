@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'stripe'
+gem 'httparty'
+gem 'devise'
 gem 'kaminari', '~> 0.17.0'
 
 # Use Active Storage variant

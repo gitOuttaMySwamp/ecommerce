@@ -18,6 +18,13 @@
       <div class="container">
       <header>
         <h1 class="title is-1"><%= link_to 'Bear and Coyote Designs', root_path %></h1>
+        <% if current_user %>
+          <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path %>
+          <%= link_to 'Sign up', new_user_registration_path %>
+        <% end %>
+        <%= link_to 'Orders',  orders_path%>
         <nav class="navbar is-light" id="navBar" aria-label="main navigation">
           <div class="navbar-start">
             <a class="navbar-item" href='/'>
@@ -50,9 +57,13 @@
                   </a>
                 </li>
               </summary>
+<<<<<<< HEAD
               <% if !@cart || @cart.empty? %>
+=======
+              <% if @cart && @cart.empty? %>
+>>>>>>> devise
                 <p>Cart is empty.</p>
-              <% else %>
+              <% elsif @cart %>
                 <ul>
                 <li><%= link_to 'Checkout', checkout_invoice_path, method: :get %></li>
                   <% @cart.each do |piece| %>
@@ -65,6 +76,10 @@
         </nav>
         <br>
       </header>
+<<<<<<< HEAD
+=======
+      <%= render 'layouts/alerts' %>
+>>>>>>> devise
       <%= yield %>
       </div>
     </section>
