@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sales Taxes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sales_taxes.each do |sales_tax| %>
+      <tr>
+        <td><%= link_to 'Show', sales_tax %></td>
+        <td><%= link_to 'Edit', edit_sales_tax_path(sales_tax) %></td>
+        <td><%= link_to 'Destroy', sales_tax, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sales Tax', new_sales_tax_path %>

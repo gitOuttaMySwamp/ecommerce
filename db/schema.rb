@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_012847) do
+ActiveRecord::Schema.define(version: 2020_04_09_165455) do
 
   create_table "details", force: :cascade do |t|
     t.string "description"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2020_04_09_012847) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "productId"
     t.integer "user_id", null: false
     t.decimal "amount"
     t.datetime "created_at", precision: 6, null: false
@@ -39,9 +38,23 @@ ActiveRecord::Schema.define(version: 2020_04_09_012847) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "product_orders", force: :cascade do |t|
+    t.integer "piece_id", null: false
+    t.integer "order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_product_orders_on_order_id"
+    t.index ["piece_id"], name: "index_product_orders_on_piece_id"
+  end
+
   create_table "provinces", force: :cascade do |t|
     t.string "name"
     t.string "code"
+  end
+
+  create_table "sales_taxes", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sizes", force: :cascade do |t|
@@ -67,4 +80,6 @@ ActiveRecord::Schema.define(version: 2020_04_09_012847) do
   end
 
   add_foreign_key "orders", "users"
+  add_foreign_key "product_orders", "orders"
+  add_foreign_key "product_orders", "pieces"
 end

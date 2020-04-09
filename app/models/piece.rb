@@ -3,7 +3,9 @@
 class Piece < ApplicationRecord
   belongs_to :size, foreign_key: :sizeId
   belongs_to :detail, foreign_key: :detailId
-  # has_many :pieceOrder
+  
+  has_many :product_orders
+  has_many :orders, through: :product_orders
 
   validates :name, :sizeId, :detailId, presence: true
 

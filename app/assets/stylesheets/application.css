@@ -77,7 +77,8 @@ i {
 .item_table tbody tr .subtotal {
   font-size: 1.5em;
   padding-left: 15px;
-  padding-bottom: 15px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .item_table tbody tr td {

@@ -12,9 +12,9 @@
       </thead>
       <tfoot>
       <tr>
-        <td>Total</td>
+        <td><strong>Total</strong></td>
         <td></td><td></td><td></td>
-        <td>$<%= @total %></td>
+        <td><strong>$<%= @total.round(2) %></strong></td>
       </tr>
       </tfoot>
       <tbody>
@@ -35,20 +35,22 @@
         <tr>
           <td>GST</td>
           <td></td><td></td><td></td>
-          <td>$5</td>
+          <td>$<%= (@gst * @subtotal).round(2) %>  <small><small>(<%= (@gst * 100).round(2) %>%)</small></small></td>
         </tr>
         <tr>
           <td>PST</td>
           <td></td><td></td><td></td>
-          <td>$2</td>
+          <td>$<%= (@pst * @subtotal).round(2) %>  <small><small>(<%= (@pst * 100).round(2) %>%)</small></small></td>
         </tr>
         <tr>
           <td>HST</td>
           <td></td><td></td><td></td>
-          <td>$1</td>
+          <td>$<%= (@hst * @subtotal).round(2) %>  <small><small>(<%= (@hst * 100).round(2) %>%)</small></small></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-<%= link_to 'Continue Shopping', root_path %>
+<%= button_to 'Confirm Purchase', controller: 'orders', action: 'create', method: :post,
+  params: { pieces: @id_array, amount: @total.round(2) }, remote: true, class: 'button is-link' %><br>
+<%= link_to 'Back to shopping', root_path %>

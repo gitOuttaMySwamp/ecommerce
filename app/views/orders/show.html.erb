@@ -1,6 +1,8 @@
 <p>
-  <strong>Productid:</strong>
-  <%= @order.productId %>
+  <strong>Products:</strong><br>
+  <% @order.pieces.each do |piece| %>
+    <%= piece.name %><br>
+  <% end %>
 </p>
 
 <p>

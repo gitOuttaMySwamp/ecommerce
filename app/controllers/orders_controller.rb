@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :set_order, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[show index]
 
   # GET /orders
   # GET /orders.json
@@ -10,8 +12,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1
   # GET /orders/1.json
-  def show
-  end
+  def show; end
 
   # GET /orders/new
   def new
@@ -19,14 +20,23 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    # params[:pieces].each do |pieceId|
+    #   product_order = ProductOrder.new(
+    #     pieceId: pieceId,
+    #     orderId:
+    #   )
+    # end
+
+    @order = Order.new
     @order.user = current_user
+    @order.pieces = Piece.where(id: params[:pieces])
+    @order.amount = params[:amount]
+    @order.save
 
     respond_to do |format|
       if @order.save
@@ -64,13 +74,14 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:productId, :amount)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def order_params
+    params.permit(:productId, :amount)
+  end
 end

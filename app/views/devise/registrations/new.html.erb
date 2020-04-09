@@ -28,7 +28,7 @@
 
   <div class='field'>
     <%= f.label :province %><br>
-    <%= f.select_tag :provinceId,
+    <%= f.select :provinceId,
       options_from_collection_for_select(Province.all, 'id', 'name') %>
   </div>
 

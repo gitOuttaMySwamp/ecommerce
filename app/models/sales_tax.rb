@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
-require 'rubygems'
-require 'httparty'
-
-class SalesTax
+class SalesTax < ApplicationRecord
   include HTTParty
   base_uri 'http://api.salestaxapi.ca/v2/'
 
-  def get_gst
+  def gst
     self.class.get('/federal/gst')
   end
-end
 
-sales_tax = SalesTax.new
-puts sales_tax.get_gst
+  def pst(province_code)
+    self.class.get("/province/#{province_code}")
+  end
+end

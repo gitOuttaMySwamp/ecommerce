@@ -31,6 +31,18 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <div class='field'>
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :province %>
+    <p>Currently: <%= current_user.province.name %></p><br>
+    <%= f.select :provinceId,
+      options_from_collection_for_select(Province.all, 'id', 'name') %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
