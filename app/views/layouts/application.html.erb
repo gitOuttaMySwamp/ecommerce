@@ -17,6 +17,12 @@
       <div class="container">
       <header>
         <h1 class="title is-1"><%= link_to 'Bear and Coyote Designs', root_path %></h1>
+        <% if current_user %>
+          <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path %>
+          <%= link_to 'Sign up', new_user_registration_path %>
+        <% end %>
         <nav class="navbar is-light" id="navBar" aria-label="main navigation">
           <div class="navbar-start">
             <a class="navbar-item" href='/'>
@@ -48,9 +54,9 @@
                   </a>
                 </li>
               </summary>
-              <% if @cart.empty? %>
+              <% if @cart && @cart.empty? %>
                 <p>Cart is empty.</p>
-              <% else %>
+              <% elsif @cart %>
                 <ul>
                   <% @cart.each do |piece| %>
                     <li><%= piece.name %> <%= link_to 'remove', remove_from_cart_path(piece), method: :delete %></li>
@@ -62,7 +68,7 @@
         </nav>
         <br>
       </header>
-      <p>You have visited this site <%= pluralize @visit_count, 'time' %>.</p>
+      <%= render 'layouts/alerts' %>
       <%= yield %>
       </div>
     </section>
