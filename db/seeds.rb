@@ -86,3 +86,69 @@
 #              detailId: 1,
 #              image: '',
 #              dimensions: '25cm x 35cm').save
+
+# # ------------------------------------------------------
+Province.create(
+  name: 'Alberta',
+  code: 'AB'
+).save
+
+Province.create(
+  name: 'British Columbia',
+  code: 'BC'
+).save
+
+Province.create(
+  name: 'Manitoba',
+  code: 'MB'
+).save
+
+Province.create(
+  name: 'New Brunswick',
+  code: 'NB'
+).save
+
+Province.create(
+  name: 'Newfoundland',
+  code: 'NL'
+).save
+
+Province.create(
+  name: 'Nova Scotia',
+  code: 'NS'
+).save
+
+Province.create(
+  name: 'Northwest Terrirories',
+  code: 'NT'
+).save
+
+Province.create(
+  name: 'Nunavut',
+  code: 'NU'
+).save
+
+Province.create(
+  name: 'Ontario',
+  code: 'ON'
+).save
+
+Province.create(
+  name: 'PEI',
+  code: 'PE'
+).save
+
+Province.create(
+  name: 'Quebec',
+  code: 'QC'
+).save
+
+Province.create(
+  name: 'Saskatchewan',
+  code: 'SK'
+).save
+
+Province.create(
+  name: 'Yukon',
+  code: 'YT'
+).save
