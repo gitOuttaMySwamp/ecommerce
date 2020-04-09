@@ -15,6 +15,11 @@ include bulma-radio-checkbox.css
 
 .input {
   width: 60% !important;
+  margin-right: 5px;
+}
+
+.select {
+  margin-right: 3px;
 }
 
 .pagination {
@@ -55,4 +60,30 @@ details {
 i {
   color: white;
   font-size: 2em;
+}
+
+.item_table {
+  margin-bottom: 50px;
+}
+
+.item_table table thead th {
+  font-size: 1.5em;
+}
+
+.item_table tfoot tr td {
+  font-size: 1.5em;
+}
+
+.item_table tbody tr .subtotal {
+  font-size: 1.5em;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+
+.item_table tbody tr td {
+  font-size: 1.2em;
+}
+
+.tax_table tr th {
+  font-size: 1.5em;
 }

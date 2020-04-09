@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  scope '/checkout' do
+    get 'invoice', to: 'checkout#invoice', as: 'checkout_invoice'
+    post 'create', to: 'checkout#create', as: 'checkout_create'
+    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
+    get 'success', to: 'checkout#success', as: 'checkout_success'
+  end
   resources :details
   resources :sizes
   resources :pieces
