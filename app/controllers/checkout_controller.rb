@@ -1,37 +1,54 @@
 # frozen_string_literal: true
 
-require 'json'
-
 class CheckoutController < ApplicationController
   def create
-    pieces = Piece.where(id: params[:id])
+    pieces = Piece.where(id: params[:id_array])
 
     if pieces.nil?
       redirect_to root_path
-      nil
+      return
     end
 
-    #   items_hash = []
-    #   pieces.each do |piece|
-    #     items_hash << {
-    #       name: piece.name,
-    #       description: "Size: #{piece.size.description} Detail: #{piece.detail.description}",
-    #       amount: ((piece.size.price.to_i + piece.detail.price.to_i) + ((piece.size.price.to_i + piece.detail.price.to_i) * @gst) + ((piece.size.price.to_i + piece.detail.price.to_i) * @pst) + ((piece.size.price.to_i + piece.detail.price.to_i) * @hst) * 100),
-    #       currency: 'cad',
-    #       quantity: 1
-    #     }
-    #   end
+    items_hash = []
+    pieces.each do |piece|
+      product_price = piece.size.price.to_f + piece.detail.price.to_f
 
-    #   @session = Stripe::Checkout::Session.create(
-    #     payment_method_types: ['card'],
-    #     line_items: items_hash,
-    #     success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
-    #     cancel_url: checkout_cancel_url
-    #   )
+      items_hash << {
+        name: piece.name,
+        description: "Size: #{piece.size.description} Detail: #{piece.detail.description}",
+        amount: (product_price * 100).round.to_i,
+        # amount: product_price.to_i,
+        currency: 'cad',
+        quantity: 1
+      }
+    end
 
-    #   respond_to do |format|
-    #     format.js # render create.js.erb
-    #   end
+    items_hash << {
+      name: 'GST',
+      description: "#{current_user.province.name} Provincial Sales Tax",
+      amount: (params[:gst_amount].to_f * 100).round.to_i,
+      currency: 'cad',
+      quantity: 1
+    }
+
+    items_hash << {
+      name: 'PST',
+      description: 'Federal Goods and Services Tax',
+      amount: (params[:pst_amount].to_f * 100).round.to_i,
+      currency: 'cad',
+      quantity: 1
+    }
+
+    @session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: items_hash,
+      success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: checkout_cancel_url
+    )
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def invoice

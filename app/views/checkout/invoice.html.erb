@@ -46,6 +46,6 @@
     </table>
   </div>
 </div>
-<%= button_to 'Confirm Purchase', order_create_path, method: :post,
-  params: { pieces: @id_array, total: @total.round(2), tax: @hst * 100 }, class: 'button is-link' %><br>
+<%= button_to 'Confirm Purchase', checkout_create_path, method: :post,
+  params: { id_array: @id_array, gst_amount: @gst * @subtotal, pst_amount: @pst * @subtotal}, remote: true, class: 'button is-link' %><br>
 <%= link_to 'Back to shopping', root_path %>
