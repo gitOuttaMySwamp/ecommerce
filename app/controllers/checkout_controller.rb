@@ -87,6 +87,7 @@ class CheckoutController < ApplicationController
     id_array = []
 
     session_p = JSON.parse(@session.to_s)
+    stripe_id = session_p['id'].to_s
 
     session_p['display_items'].each do |item|
       total_amount += (item['amount'].to_i / 100.00)
@@ -102,7 +103,8 @@ class CheckoutController < ApplicationController
     repost(order_create_path, params: {
              pieces: id_array,
              total: total_amount,
-             tax: total_tax
+             tax: total_tax,
+             stripe_id: stripe_id
            }, options: { authenticity_token: :auto })
   end
 

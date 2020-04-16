@@ -29,7 +29,8 @@ class OrdersController < ApplicationController
       user: current_user,
       pieces: Piece.where(id: params[:pieces]),
       amount: params[:total],
-      tax: params[:tax]
+      tax: params[:tax],
+      paid: true
     )
 
     @order.save

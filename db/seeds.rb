@@ -164,6 +164,6 @@
 #   puts po.inspect
 # end
 
-admin = User.where(email: 'garronvgj11@gmail.com').first
-admin.admin = true
-admin.save
+# admin = User.where(email: 'garronvgj11@gmail.com').first
+# admin.admin = true
+# admin.save
