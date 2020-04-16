@@ -26,6 +26,7 @@ gem 'stripe'
 gem 'httparty'
 gem 'devise'
 gem 'kaminari', '~> 0.17.0'
+gem 'repost'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

@@ -159,6 +159,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.7.0)
+    repost (0.3.2)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -234,6 +235,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
+  repost
   sass-rails (>= 6)
   selenium-webdriver
   spring

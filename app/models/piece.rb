@@ -8,6 +8,7 @@ class Piece < ApplicationRecord
   has_many :orders, through: :product_orders, dependent: :destroy
 
   validates :name, :sizeId, :detailId, presence: true
+  validates :name, uniqueness: true
 
   paginates_per 5
   max_paginates_per 100

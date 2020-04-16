@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'json'
+require 'repost'
+
 class CheckoutController < ApplicationController
   def create
     pieces = Piece.where(id: params[:id_array])
@@ -78,6 +81,29 @@ class CheckoutController < ApplicationController
   def success
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+
+    total_amount = 0
+    total_tax = 0
+    id_array = []
+
+    session_p = JSON.parse(@session.to_s)
+
+    session_p['display_items'].each do |item|
+      total_amount += (item['amount'].to_i / 100.00)
+
+      if item['custom']['name'].to_s.eql?('GST') || item['custom']['name'].to_s.eql?('PST')
+        total_tax += (item['amount'].to_i / 100.00)
+      else
+        piece = Piece.where(name: item['custom']['name']).first
+        id_array << piece.id unless piece.nil?
+      end
+    end
+
+    repost(order_create_path, params: {
+             pieces: id_array,
+             total: total_amount,
+             tax: total_tax
+           }, options: { authenticity_token: :auto })
   end
 
   def cancel
