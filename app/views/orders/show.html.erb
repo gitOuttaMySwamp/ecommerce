@@ -1,7 +1,8 @@
 <p>
   <strong>Products:</strong><br>
   <% @order.pieces.each do |piece| %>
-    <%= piece.name %><br>
+    <%= piece.name %>
+    <p>$<%= piece.size.price + piece.detail.price %><p> <br>
   <% end %>
 </p>
 
@@ -11,8 +12,13 @@
 </p>
 
 <p>
-  <strong>Amount:</strong>
-  <%= @order.amount %>
+  <strong>Tax:</strong>
+  $<%= @order.tax %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  $<%= @order.amount %>
 </p>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |

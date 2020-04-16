@@ -42,15 +42,10 @@
           <td></td><td></td><td></td>
           <td>$<%= (@pst * @subtotal).round(2) %>  <small><small>(<%= (@pst * 100).round(2) %>%)</small></small></td>
         </tr>
-        <tr>
-          <td>HST</td>
-          <td></td><td></td><td></td>
-          <td>$<%= (@hst * @subtotal).round(2) %>  <small><small>(<%= (@hst * 100).round(2) %>%)</small></small></td>
-        </tr>
       </tbody>
     </table>
   </div>
 </div>
-<%= button_to 'Confirm Purchase', controller: 'orders', action: 'create', method: :post,
-  params: { pieces: @id_array, amount: @total.round(2) }, remote: true, class: 'button is-link' %><br>
+<%= button_to 'Confirm Purchase', order_create_path, method: :post,
+  params: { pieces: @id_array, total: @total.round(2), tax: @hst * 100 }, class: 'button is-link' %><br>
 <%= link_to 'Back to shopping', root_path %>

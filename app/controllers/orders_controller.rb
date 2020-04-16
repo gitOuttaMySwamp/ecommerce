@@ -25,19 +25,14 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    # params[:pieces].each do |pieceId|
-    #   product_order = ProductOrder.new(
-    #     pieceId: pieceId,
-    #     orderId:
-    #   )
-    # end
+    @order = Order.new(
+      user: current_user,
+      pieces: Piece.where(id: params[:pieces]),
+      amount: params[:total],
+      tax: params[:tax]
+    )
 
-    @order = Order.new
-    @order.user = current_user
-    @order.pieces = Piece.where(id: params[:pieces])
-    @order.amount = params[:amount]
     @order.save
-
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }

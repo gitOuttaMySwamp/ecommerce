@@ -55,7 +55,7 @@ class CheckoutController < ApplicationController
     @pst = pst_response['pst'].to_f
     @hst = pst_response['hst'].to_f
 
-    @total = @subtotal + (@gst * @subtotal) + (@pst * @subtotal) + (@hst * @subtotal)
+    @total = @subtotal + (@gst * @subtotal) + (@pst * @subtotal)
   end
 
   def success
