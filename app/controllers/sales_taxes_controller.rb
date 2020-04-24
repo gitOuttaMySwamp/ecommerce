@@ -1,5 +1,5 @@
 class SalesTaxesController < ApplicationController
-  before_action :set_sales_tax, only: [:show, :edit, :update, :destroy]
+  before_action :set_sales_tax, only: %i[show edit update destroy]
 
   # GET /sales_taxes
   # GET /sales_taxes.json
@@ -9,8 +9,7 @@ class SalesTaxesController < ApplicationController
 
   # GET /sales_taxes/1
   # GET /sales_taxes/1.json
-  def show
-  end
+  def show; end
 
   # GET /sales_taxes/new
   def new
@@ -18,8 +17,7 @@ class SalesTaxesController < ApplicationController
   end
 
   # GET /sales_taxes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /sales_taxes
   # POST /sales_taxes.json
@@ -28,7 +26,7 @@ class SalesTaxesController < ApplicationController
 
     respond_to do |format|
       if @sales_tax.save
-        format.html { redirect_to @sales_tax, notice: 'Sales tax was successfully created.' }
+        format.html { redirect_to @sales_tax, notice: "Sales tax was successfully created." }
         format.json { render :show, status: :created, location: @sales_tax }
       else
         format.html { render :new }
@@ -42,7 +40,7 @@ class SalesTaxesController < ApplicationController
   def update
     respond_to do |format|
       if @sales_tax.update(sales_tax_params)
-        format.html { redirect_to @sales_tax, notice: 'Sales tax was successfully updated.' }
+        format.html { redirect_to @sales_tax, notice: "Sales tax was successfully updated." }
         format.json { render :show, status: :ok, location: @sales_tax }
       else
         format.html { render :edit }
@@ -56,19 +54,20 @@ class SalesTaxesController < ApplicationController
   def destroy
     @sales_tax.destroy
     respond_to do |format|
-      format.html { redirect_to sales_taxes_url, notice: 'Sales tax was successfully destroyed.' }
+      format.html { redirect_to sales_taxes_url, notice: "Sales tax was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sales_tax
-      @sales_tax = SalesTax.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def sales_tax_params
-      params.fetch(:sales_tax, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sales_tax
+    @sales_tax = SalesTax.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def sales_tax_params
+    params.fetch(:sales_tax, {})
+  end
 end

@@ -1,3 +1,6 @@
+<% if current_user && current_user.admin %>
+  <%= link_to 'Add Piece', new_piece_path %><br><br>
+<% end %>
 <div class="columns is-multiline">
   <% @pieces.each do |piece| %>
   <div class="column is-half">
@@ -24,7 +27,10 @@
     <% else %>
       <p><%= link_to 'add to cart', add_to_cart_path(piece.id), method: :post %></p>
     <% end %>
-    <%= button_to 'buy now', checkout_create_path, method: :post, params: { id: piece.id }, remote: true %>
+    <% if current_user && current_user.admin %>
+      <%= link_to 'Edit', edit_piece_path(piece) %>
+      <%= link_to 'Destroy', piece, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </div>
   <% end %>
 </div>

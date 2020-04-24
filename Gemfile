@@ -28,6 +28,9 @@ gem 'devise'
 gem 'kaminari', '~> 0.17.0'
 gem 'repost'
 
+gem 'rubocop', '~> 0.70.0'
+gem 'rubocop-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

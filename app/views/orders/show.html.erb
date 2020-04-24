@@ -21,5 +21,15 @@
   $<%= @order.amount %>
 </p>
 
+<p>
+  <strong>Paid:</strong>
+  <%= @order.paid == 0 ? 'False' : 'True' %>
+</p>
+
+<p>
+  <strong>Stripe ID:</strong>
+  <%= @order.stripeId %>
+</p>
+
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

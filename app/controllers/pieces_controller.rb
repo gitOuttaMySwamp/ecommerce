@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PiecesController < ApplicationController
-  before_action :set_piece, only: [:show]
+  before_action :set_piece, only: %i[show edit update destroy]
   before_action :setup_session
   before_action :increment_visit_count, only: %i[index]
 
@@ -10,6 +10,14 @@ class PiecesController < ApplicationController
   def index
     @pieces = Piece.search(params[:search], params[:size], params[:page])
   end
+
+  # GET /pieces/new
+  def new
+    @piece = Piece.new
+  end
+
+  # GET /pieces/1/edit
+  def edit; end
 
   # GET /pieces/1
   # GET /pieces/1.json
@@ -28,54 +36,45 @@ class PiecesController < ApplicationController
     redirect_to root_path
   end
 
-  # # GET /pieces/new
-  # def new
-  #   @piece = Piece.new
-  # end
-
-  # # GET /pieces/1/edit
-  # def edit
-  # end
-
   # # POST /pieces
   # # POST /pieces.json
-  # def create
-  #   @piece = Piece.new(piece_params)
+  def create
+    @piece = Piece.new(piece_params)
 
-  #   respond_to do |format|
-  #     if @piece.save
-  #       format.html { redirect_to @piece, notice: 'Piece was successfully created.' }
-  #       format.json { render :show, status: :created, location: @piece }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @piece.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+    respond_to do |format|
+      if @piece.save
+        format.html { redirect_to @piece, notice: "Piece was successfully created." }
+        format.json { render :show, status: :created, location: @piece }
+      else
+        format.html { render :new }
+        format.json { render json: @piece.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # # PATCH/PUT /pieces/1
   # # PATCH/PUT /pieces/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @piece.update(piece_params)
-  #       format.html { redirect_to @piece, notice: 'Piece was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @piece }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @piece.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  def update
+    respond_to do |format|
+      if @piece.update(piece_params)
+        format.html { redirect_to @piece, notice: "Piece was successfully updated." }
+        format.json { render :show, status: :ok, location: @piece }
+      else
+        format.html { render :edit }
+        format.json { render json: @piece.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # # DELETE /pieces/1
   # # DELETE /pieces/1.json
-  # def destroy
-  #   @piece.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to pieces_url, notice: 'Piece was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
+  def destroy
+    @piece.destroy
+    respond_to do |format|
+      format.html { redirect_to pieces_url, notice: "Piece was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
 
   private
 
@@ -97,6 +96,6 @@ class PiecesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def piece_params
-    params.require(:piece).permit(:name, :price, :sizeId, :detailId, :image, :dimensions)
+    params.require(:piece).permit(:name, :sizeId, :detailId, :dimensions)
   end
 end

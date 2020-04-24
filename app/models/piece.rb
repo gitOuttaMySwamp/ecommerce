@@ -23,7 +23,7 @@ class Piece < ApplicationRecord
     if !search.to_s.strip.empty?
       'name LIKE "%' + search.strip + '%"'
     else
-      '1 = 1'
+      "1 = 1"
     end
   end
 
@@ -31,7 +31,7 @@ class Piece < ApplicationRecord
     if size.to_i.positive?
       "sizeId = #{size}"
     else
-      '1 = 1'
+      "1 = 1"
     end
   end
 end

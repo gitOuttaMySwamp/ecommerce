@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :pieces
 
   # get '/home/about'
+  # put 'pieces/edit/:id', to: 'pieces#update', as: 'edit_piece_path'
   post 'pieces/add_to_cart/:id', to: 'pieces#add_to_cart', as: 'add_to_cart'
   delete 'pieces/remove_from_cart/:id', to: 'pieces#remove_from_cart', as: 'remove_from_cart'
 end

@@ -1,5 +1,5 @@
 class ProductOrdersController < ApplicationController
-  before_action :set_product_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_product_order, only: %i[show edit update destroy]
 
   # GET /product_orders
   # GET /product_orders.json
@@ -9,8 +9,7 @@ class ProductOrdersController < ApplicationController
 
   # GET /product_orders/1
   # GET /product_orders/1.json
-  def show
-  end
+  def show; end
 
   # GET /product_orders/new
   def new
@@ -18,8 +17,7 @@ class ProductOrdersController < ApplicationController
   end
 
   # GET /product_orders/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /product_orders
   # POST /product_orders.json
@@ -28,7 +26,7 @@ class ProductOrdersController < ApplicationController
 
     respond_to do |format|
       if @product_order.save
-        format.html { redirect_to @product_order, notice: 'Product order was successfully created.' }
+        format.html { redirect_to @product_order, notice: create_success }
         format.json { render :show, status: :created, location: @product_order }
       else
         format.html { render :new }
@@ -42,7 +40,7 @@ class ProductOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @product_order.update(product_order_params)
-        format.html { redirect_to @product_order, notice: 'Product order was successfully updated.' }
+        format.html { redirect_to @product_order, notice: update_success }
         format.json { render :show, status: :ok, location: @product_order }
       else
         format.html { render :edit }
@@ -56,19 +54,32 @@ class ProductOrdersController < ApplicationController
   def destroy
     @product_order.destroy
     respond_to do |format|
-      format.html { redirect_to product_orders_url, notice: 'Product order was successfully destroyed.' }
+      format.html { redirect_to product_orders_url, notice: success_message }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product_order
-      @product_order = ProductOrder.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_order_params
-      params.require(:product_order).permit(:piece_id, :order_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product_order
+    @product_order = ProductOrder.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_order_params
+    params.require(:product_order).permit(:piece_id, :order_id)
+  end
+
+  def destroy_success
+    "Product order was successfully destroyed."
+  end
+
+  def update_success
+    "Product order was successfully updated."
+  end
+
+  def create_success
+    "Product order was successfully created."
+  end
 end
