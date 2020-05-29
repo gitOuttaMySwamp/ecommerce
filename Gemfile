@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'stripe'
 gem 'httparty'
 gem 'devise'
-gem 'kaminari', '~> 0.17.0'
+gem 'kaminari', '~> 1.2.1'
 gem 'repost'
 
 gem 'rubocop', '~> 0.70.0'
